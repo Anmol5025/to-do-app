@@ -1,12 +1,15 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
+import { ThemeProvider } from '../../context/ThemeContext';
 import Login from './Login';
 
 const MockLogin = () => (
-  <BrowserRouter>
-    <Login />
-  </BrowserRouter>
+  <ThemeProvider>
+    <BrowserRouter>
+      <Login />
+    </BrowserRouter>
+  </ThemeProvider>
 );
 
 describe('Login Component', () => {
@@ -24,6 +27,20 @@ describe('Login Component', () => {
     
     expect(screen.getByText('Email is required')).toBeInTheDocument();
     expect(screen.getByText('Password is required')).toBeInTheDocument();
+  });
+
+  test('shows error for invalid email format', () => {
+    render(<MockLogin />);
+    
+    const emailInput = screen.getByPlaceholderText('intern@demo.com');
+    const passwordInput = screen.getByPlaceholderText('Enter password');
+    const loginButton = screen.getByText('Login');
+    
+    fireEvent.change(emailInput, { target: { value: 'invalidemail' } });
+    fireEvent.change(passwordInput, { target: { value: 'password123' } });
+    fireEvent.click(loginButton);
+    
+    expect(screen.getByText('Email is invalid')).toBeInTheDocument();
   });
 
   test('shows error for invalid credentials', () => {

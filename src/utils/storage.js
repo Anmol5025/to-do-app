@@ -26,6 +26,7 @@ export const storage = {
 
   clearUser: () => {
     localStorage.removeItem(STORAGE_KEYS.USER);
+    localStorage.removeItem(STORAGE_KEYS.REMEMBER_ME);
   },
 
   shouldRememberUser: () => {
