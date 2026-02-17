@@ -19,7 +19,6 @@ export default function Column({ title, tasks, onDrop, onEdit, onDelete }) {
     <div style={{ ...styles.column, backgroundColor: colors.surface, boxShadow: `0 2px 8px ${colors.shadow}` }}>
       <div style={{ ...styles.header, borderBottomColor: colors.border }}>
         <h3 style={{ ...styles.title, color: colors.text }}>{title}</h3>
-        <span style={{ ...styles.count, backgroundColor: colors.primary }}>{tasks.length}</span>
       </div>
       <div
         style={styles.taskList}
@@ -62,13 +61,6 @@ const styles = {
     margin: 0,
     fontSize: '1.25rem',
     fontWeight: '700'
-  },
-  count: {
-    color: 'white',
-    padding: '0.35rem 0.65rem',
-    borderRadius: '20px',
-    fontSize: '0.95rem',
-    fontWeight: '600'
   },
   taskList: {
     flex: 1,
